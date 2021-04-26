@@ -1,2 +1,2 @@
-# react-passport-login
-React app with Passport Auth for learning.  No biggie.
+# passportjs-node-login
+Node app with Passport Auth for learning.  No biggie.
