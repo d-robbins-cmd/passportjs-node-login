@@ -4,16 +4,16 @@ const router = express.Router()
 
 //basic page GETss
 router.get('/', ( req, res ) => {
-    res.send('home route')
+    res.render( 'home' )
 })
 router.get( '/home', ( req, res ) => {
-    res.send('home route')
+    res.render( 'home' )
 })
 router.get( '/login', ( req, res ) => {
-    res.send('login route')
+    res.render( 'login' )
 })
 router.get( '/register', ( req, res ) => {
-    res.send('register route')
+    res.render( 'register' )
 })
 
 
