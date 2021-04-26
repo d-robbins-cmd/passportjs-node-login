@@ -1,21 +1,21 @@
 {
-  "name": "react-passport-login",
+  "name": "passportjs-node-login",
   "version": "1.0.0",
-  "description": "React app with Passport Auth for learning.  No biggie.",
+  "description": "Node/Passport JS Auth for learning.  No biggie.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/d-robbins-cmd/react-passport-login.git"
+    "url": "git+https://github.com/d-robbins-cmd/passportjs-node-login.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/d-robbins-cmd/react-passport-login/issues"
+    "url": "https://github.com/d-robbins-cmd/passportjs-node-login/issues"
   },
-  "homepage": "https://github.com/d-robbins-cmd/react-passport-login#readme",
+  "homepage": "https://github.com/d-robbins-cmd/passportjs-node-login#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
