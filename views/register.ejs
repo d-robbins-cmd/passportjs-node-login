@@ -2,6 +2,48 @@
 
 <h3>register page</h3>
 
+
+<div>
+    <% if ( locals.message ) { %>
+
+        <% locals.message.errors.forEach( error =>  { %>
+
+            <% if ( error.name ){ %>
+
+                <li><%= error.name %></li>
+
+            <% } %>
+
+            <% if ( error.email ){ %>
+
+                <li><%= error.email %></li>
+
+            <% } %>
+
+            <% if ( error.password ){ %>
+
+                <li><%= error.password %></li>
+                <br><br>
+
+            <% } %>
+
+        <% }); %>
+      
+   <% } %>
+   
+</div>
+
+<% if ( locals.message ) { %>
+ 
+    <% locals.message.formValues.forEach( value =>  { %>
+
+        <div><%= value.password %></div>
+
+    <% }); %>
+
+<% } %>
+
+
 <form action='/register' method="POST">
     <label>name</label>
     <input type="text" id="name" name="name"><br>
