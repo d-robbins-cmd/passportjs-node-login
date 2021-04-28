@@ -72,13 +72,9 @@ router.get('/', ( req, res ) => {
 router.get( '/home', ( req, res ) => {
     res.render( 'home' , { authenticated: req.isAuthenticated() })
 })
-
-
 router.get( '/login', ( req, res ) => {
     res.render( 'login', { authenticated: req.isAuthenticated() } )
 })
-
-
 router.get( '/register', ( req, res ) => {
     res.render( 'register', { authenticated: req.isAuthenticated() } )
 })

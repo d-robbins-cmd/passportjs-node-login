@@ -1,11 +1,14 @@
 <nav>
     <a href="/home">home</a>
-    <a href="/login">login</a>
-    <a href="/register">register</a>
-    <a href="/logout">logout</a>
+    <a href="/protected">protected</a>
+    <% if ( authenticated == false ) { %> 
+        <a href="/login">login</a>
+        <a href="/register">register</a>
+    <% } else { %>
+        <a href="/logout">logout</a>
+    <% } %>
 </nav>
 
-<!-- todo -> remove login and register link if user is logged in -->
 
 authenticated : <%= authenticated %>
                 
