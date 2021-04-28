@@ -1,57 +1,49 @@
 <%- include( 'partials/navigation' ) %>
 
-<h3>register page</h3>
+<h3>Register</h3>
 
-
-<div>
-    <% if ( locals.message ) { %>
-
-        <% locals.message.errors.forEach( error =>  { %>
-
-            <% if ( error.name ){ %>
-
-                <li><%= error.name %></li>
-
-            <% } %>
-
-            <% if ( error.email ){ %>
-
-                <li><%= error.email %></li>
-
-            <% } %>
-
-            <% if ( error.password ){ %>
-
-                <li><%= error.password %></li>
-                <br><br>
-
-            <% } %>
-
-        <% }); %>
-      
-   <% } %>
-   
-</div>
-
-<% if ( locals.message ) { %>
- 
-    <% locals.message.formValues.forEach( value =>  { %>
-
-        <div><%= value.password %></div>
-
-    <% }); %>
-
+<!-- display errors if any -->
+<% if ( locals.errors ) { %> 
+    <ul>
+        <% errors.forEach( error =>  { %>
+            <li><%= error.message %></li>
+        <% }) %>
+    </ul>
 <% } %>
-
 
 <form action='/register' method="POST">
     <label>name</label>
-    <input type="text" id="name" name="name"><br>
+    <input 
+        type="text" 
+        id="name" 
+        name="name"
+        value="<%= typeof name != 'undefined' ? name : '' %>"
+        >
+    <br>
     <label>email</label>
-    <input type="email" id="email" name="email"><br>
+    <input 
+        type="email" 
+        id="email" 
+        name="email"
+        value="<%= typeof email != 'undefined' ? email : '' %>"
+        >
+    <br>
     <label>password</label>
-    <input type="password" id="password" name="password"><br>
+    <input 
+        type="password" 
+        id="password" 
+        name="password"
+        value="<%= typeof password != 'undefined' ? password : '' %>"
+        >
+        <br>
     <label>password 2</label>
-    <input type="password" id="password2" name="password2">
+    <input 
+        type="password" 
+        id="password2" 
+        name="password2"
+        value="<%= typeof password2 != 'undefined' ? password : '' %>"
+        >
     <button type="submit">submit</button>
 </form>
+
+

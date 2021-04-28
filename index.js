@@ -7,7 +7,6 @@ const path = require( 'path' )
 app.set( 'view engine', 'ejs' )
 app.use( '/', routes )
 app.set( 'views', path.join( __dirname, 'views' ) )
-const mongoose = require('mongoose')
 mongoose.connect( process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true } );
 const db = mongoose.connection
 db.once('open', function() {

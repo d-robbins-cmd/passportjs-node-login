@@ -1,6 +1,18 @@
 <%- include( 'partials/navigation' ) %>
 <h3>login page</h3>
 
+<!-- display errors if there are any -->
+
+<% if ( locals.errors ) { %> 
+    <ul>
+        <% errors.forEach( error =>  { %>
+            <li><%= error %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+
+
 <form action="/login" method="POST">
     <label>email</label>
     <input type="email" id="email" name="email"><br>
