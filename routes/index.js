@@ -12,11 +12,13 @@ const flash = require('connect-flash')
 router.use( session({
     secret: 'keyboardcat',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    saveUninitialized: false
 }))
+router.use( passport.initialize() )
+router.use( passport.session() )
 router.use( flash() )
 
+//mongoose
 const mongoose = require('mongoose')
 const { render } = require('ejs')
 mongoose.connect( process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true } );
@@ -29,8 +31,8 @@ const userSchema = new mongoose.Schema({
     email: String, 
     password: String
 });
-
 const userModel = mongoose.model( 'User', userSchema )
+
 
 //passport
 passport.use( new LocalStrategy({
@@ -45,7 +47,7 @@ passport.use( new LocalStrategy({
 }))
 
 passport.serializeUser( function( user, done ) {
-  done( null, user._id )
+  done( null, user._id ) //mongo uses "_id"
 })
 
 passport.deserializeUser( function( id, done ) {
@@ -54,23 +56,40 @@ passport.deserializeUser( function( id, done ) {
   })
 })
 
+const isLoggedIn = ( req, res, next ) => {
+    if ( req.isAuthenticated() ) {
+        next()
+    } else {
+        res.render( 'login' )
+    }
+}
+
 
 //basic page GET
 router.get('/', ( req, res ) => {
-    res.render( 'home' )
+    res.render( 'home', { authenticated: req.isAuthenticated() } )
 })
 router.get( '/home', ( req, res ) => {
-    res.render( 'home' )
-})
-router.get( '/login', ( req, res ) => {
-    res.render( 'login' )
+    res.render( 'home' , { authenticated: req.isAuthenticated() })
 })
 
+
+router.get( '/login', ( req, res ) => {
+    res.render( 'login', { authenticated: req.isAuthenticated() } )
+})
 
 
 router.get( '/register', ( req, res ) => {
-    res.render('register')
+    res.render( 'register', { authenticated: req.isAuthenticated() } )
 })
+router.get( '/protected', isLoggedIn, ( req, res ) => {
+    res.render( 'protected' , { authenticated: req.isAuthenticated() })
+})
+router.get( '/logout', function( req, res ){
+    req.logout()
+    res.redirect( '/' )
+})
+
 
 router.post( '/register', ( req, res ) => {
 
@@ -80,7 +99,7 @@ router.post( '/register', ( req, res ) => {
     if ( !result.isValid ){ 
         const errors = result.errors
         //send errors and form values back 
-        res.render( 'register', { errors, name, email, password, password2 } )
+        res.render( 'register', { errors, name, email, password, password2, authenticated: req.isAuthenticated() } )
     } else {
   
         let thisUser = new userModel({
@@ -99,8 +118,8 @@ router.post( '/register', ( req, res ) => {
         bcrypt.genSalt( 10, function( err, salt ) {
             bcrypt.hash( password , salt, function( err, hash ) {
                 thisUser.save(( err, result ) => {
-                   res.render('login', { errors: [{ message: 'User successfully registerd'}]} )
-                    
+                   //todo error handle
+                   res.render('login', { errors: [{ message: 'User successfully registerd'}], authenticated: req.isAuthenticated() }  )
                 })
             })
         })
@@ -108,21 +127,17 @@ router.post( '/register', ( req, res ) => {
     }
 })
 
-
-router.post( '/login', ( req, res ) => {
-    let result = validateLogin( req.body )
-
-    if ( !result.isValid ){
-        //send form values back to the form 
-        const { email, password } = req.body
-        const errors = result.errors
-        res.render( 'login', { errors, email, password })
-    } else {
-
-
+router.post('/login', 
+    passport.authenticate( 'local',   
+     {
+        successRedirect: '/home',
+        failureRedirect: '/login'
+        //TODO add flash here and implement messages for failed login
+    }),
+    ( req, res ) => {
+        res.render('home')
     }
-
-})
+)
 
 
 
