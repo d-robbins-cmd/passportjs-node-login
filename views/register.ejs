@@ -1,49 +1,75 @@
-<%- include( 'partials/navigation' ) %>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <%- include( 'partials/head' ) %>
+    </head>
+    <body>
+        <h3>Register</h3>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header>
+            <%- include( 'partials/header' ) %>
+        </header>
 
-<h3>Register</h3>
+        <main>
 
-<!-- display errors if any -->
-<% if ( locals.errors ) { %> 
-    <ul>
-        <% errors.forEach( error =>  { %>
-            <li><%= error.message %></li>
-        <% }) %>
-    </ul>
-<% } %>
+            <!-- display errors if any -->
+            <% if ( locals.errors ) { %> 
+                <ul>
+                    <% errors.forEach( error =>  { %>
+                        <li><%= error.message %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
 
-<form action='/register' method="POST">
-    <label>name</label>
-    <input 
-        type="text" 
-        id="name" 
-        name="name"
-        value="<%= typeof name != 'undefined' ? name : '' %>"
-        >
-    <br>
-    <label>email</label>
-    <input 
-        type="email" 
-        id="email" 
-        name="email"
-        value="<%= typeof email != 'undefined' ? email : '' %>"
-        >
-    <br>
-    <label>password</label>
-    <input 
-        type="password" 
-        id="password" 
-        name="password"
-        value="<%= typeof password != 'undefined' ? password : '' %>"
-        >
-        <br>
-    <label>password 2</label>
-    <input 
-        type="password" 
-        id="password2" 
-        name="password2"
-        value="<%= typeof password2 != 'undefined' ? password : '' %>"
-        >
-    <button type="submit">submit</button>
-</form>
+            <form action='/register' method="POST">
+                <label>name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name"
+                    value="<%= typeof name != 'undefined' ? name : '' %>"
+                    >
+                <br>
+                <label>email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    value="<%= typeof email != 'undefined' ? email : '' %>"
+                    >
+                <br>
+                <label>password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password"
+                    value="<%= typeof password != 'undefined' ? password : '' %>"
+                    >
+                    <br>
+                <label>password 2</label>
+                <input 
+                    type="password" 
+                    id="password2" 
+                    name="password2"
+                    value="<%= typeof password2 != 'undefined' ? password : '' %>"
+                    >
+                <button type="submit">submit</button>
+            </form>
+
+        </main>
+
+    </body>
+</html>
+
+
+
+
+
 
 

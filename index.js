@@ -8,10 +8,6 @@ app.set( 'view engine', 'ejs' )
 app.use( '/', routes )
 app.set( 'views', path.join( __dirname, 'views' ) )
 
-
-
-
-
 app.listen( port, () => {
     console.log(`Server running on port ${ port }`)
 })
