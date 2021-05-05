@@ -1,18 +1,41 @@
 <!-- todo...add Hi<name> -->
 
 
+    <ul class="nav justify-content-center">
 
-<nav>
-    <a href="/home">home</a>
-    <a href="/protected">protected</a>
-    <% if ( authenticated == false ) { %> 
-        <a href="/login">login</a>
-        <a href="/register">register</a>
-    <% } else { %>
-        <a href="/logout">logout</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="/home">home</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/protected">protected</a>
+        </li>
+
+        <% if ( authenticated == false ) { %> 
+
+            <li class="nav-item">
+               <a class="nav-link" href="/login">login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">register</a>
+            </li>
+
+        <% } else { %>
+
+            <li class="nav-item">
+                 <a class="nav-link" href="/logout">log out</a> <!-- disabled attribute added to the a tag disables it -->
+            </li>
+
+        <% } %>
+
+    </ul>
+
+    <% if ( uName !== '' ) { %>     
+
+        <h1 class="center-text">hello, <%= uName %>!</h1>
+
     <% } %>
-</nav>
 
 
-authenticated : <%= authenticated %>
+
                 

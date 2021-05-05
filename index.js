@@ -7,7 +7,11 @@ const path = require( 'path' )
 app.set( 'view engine', 'ejs' )
 app.use( '/', routes )
 app.set( 'views', path.join( __dirname, 'views' ) )
+app.use( express.static( __dirname + '/public' ) )
 
 app.listen( port, () => {
     console.log(`Server running on port ${ port }`)
 })
+
+//TODO include free theme link 
+//https://codepen.io/colorlib/pen/rxddKy

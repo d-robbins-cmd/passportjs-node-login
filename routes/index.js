@@ -59,26 +59,30 @@ passport.deserializeUser( function( id, done ) {
 const isLoggedIn = ( req, res, next ) => {
     if ( req.isAuthenticated() ) {
         next()
-    } else {
-        res.render( 'login', { authenticated: req.isAuthenticated() }  )
+    } else { ///////////////////////
+        res.render( 'login', { authenticated: req.isAuthenticated(), uName: '' }  )
     }
 }
 
 //basic page GET
 router.get('/', ( req, res ) => {
-    res.render( 'home', { authenticated: req.isAuthenticated() } )
+    let uName = ( req.user ) ? req.user.name : ''
+    res.render( 'home', { authenticated: req.isAuthenticated(), uName: uName } )
 })
 router.get( '/home', ( req, res ) => {
-    res.render( 'home' , { authenticated: req.isAuthenticated() })
+    let uName = ( req.user ) ? req.user.name : ''
+    res.render( 'home' , { authenticated: req.isAuthenticated(), uName: uName })
 })
 router.get( '/login', ( req, res ) => {
-    res.render( 'login', { authenticated: req.isAuthenticated() } )
+    let uName = ( req.user ) ? req.user.name : ''
+    res.render( 'login', { authenticated: req.isAuthenticated(), uName: '' } )
 })
 router.get( '/register', ( req, res ) => {
-    res.render( 'register', { authenticated: req.isAuthenticated() } )
+    res.render( 'register', { authenticated: req.isAuthenticated(), uName:'' } )
 })
 router.get( '/protected', isLoggedIn, ( req, res ) => {
-    res.render( 'protected' , { authenticated: req.isAuthenticated() })
+    let uName = ( req.user ) ? req.user.name : ''
+    res.render( 'protected' , { authenticated: req.isAuthenticated(), uName: uName })
 })
 router.get( '/logout', function( req, res ){
     req.logout()
@@ -114,7 +118,7 @@ router.post( '/register', ( req, res ) => {
             bcrypt.hash( password , salt, function( err, hash ) {
                 thisUser.save(( err, result ) => {
                    //todo error handle
-                   res.render('login', { errors: [{ message: 'User successfully registerd'}], authenticated: req.isAuthenticated() }  )
+                   res.render('login', { errors: [{ message: 'User successfully registerd'}], authenticated: req.isAuthenticated(), uName: '' }  )
                 })
             })
         })
@@ -125,8 +129,8 @@ router.post( '/register', ( req, res ) => {
 router.post('/login', 
     passport.authenticate( 'local',   
      {
-        successRedirect: '/home',
-        failureRedirect: '/login'
+        successRedirect: '/',
+        failureRedirect: '/'
         //TODO add flash here and implement messages for failed login
     }),
     ( req, res ) => {
