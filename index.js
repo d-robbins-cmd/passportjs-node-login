@@ -12,6 +12,3 @@ app.use( express.static( __dirname + '/public' ) )
 app.listen( port, () => {
     console.log(`Server running on port ${ port }`)
 })
-
-//TODO include free theme link 
-//https://codepen.io/colorlib/pen/rxddKy
