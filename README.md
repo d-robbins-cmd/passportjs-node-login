@@ -6,3 +6,5 @@ Simple web demonstrating auth using Passport JS (Local Strategy)
 - EJS for rendering
 - Bootstrap
 - Mongoose
+
+[Template Used](https://codepen.io/colorlib/pen/rxddKy "Template")
