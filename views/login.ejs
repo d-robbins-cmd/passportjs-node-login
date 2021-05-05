@@ -18,7 +18,8 @@
         <main>
             <h3 class="banner">login</h3>
             <!-- display errors if there are any -->
-            <% if ( locals.errors ) { %> 
+            <% if ( locals.errors > 0 ) { %> 
+                <h3>we have errors</h3>
                 <ul>
                     <% errors.forEach( error =>  { %>
                         <li><%= error.message %></li>

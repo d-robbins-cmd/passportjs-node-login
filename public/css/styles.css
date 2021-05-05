@@ -117,3 +117,7 @@ body {
 .center-text {
   text-align: center;
 }
+
+.error-message {
+  color:red; 
+}

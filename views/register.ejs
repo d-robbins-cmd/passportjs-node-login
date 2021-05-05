@@ -20,11 +20,11 @@
             <h3 class="banner">register</h3>
             <!-- display errors if any -->
             <% if ( locals.errors ) { %> 
-                <ul>
+                <div class="center-text">
                     <% errors.forEach( error =>  { %>
-                        <li><%= error.message %></li>
+                        <div class="error-message"><%= error.message %></div>
                     <% }) %>
-                </ul>
+                </div>
             <% } %>
 
             <div class="login-page">
@@ -59,7 +59,7 @@
                             id="password2" 
                             name="password2"
                             placeholder="confirm password"
-                            value="<%= typeof password2 != 'undefined' ? password : '' %>"
+                            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
                         />
 
                         <button type="submit">create</button>
